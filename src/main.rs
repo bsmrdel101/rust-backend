@@ -1,11 +1,19 @@
 use std::env;
+use std::sync::Arc;
 
 mod controllers;
+mod modules {
+    pub mod db;
+}
+
+use modules::db;
 
 
 #[async_std::main]
 async fn main() -> tide::Result<()> {
-    let mut app = tide::new();
+    let pool = db::init_pool().await?;
+    let pool = Arc::new(pool);
+    let mut app = tide::with_state(pool.clone());
 
     controllers::tasks::register(&mut app);
 
