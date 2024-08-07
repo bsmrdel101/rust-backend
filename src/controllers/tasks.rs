@@ -15,7 +15,7 @@ pub fn register(app: &mut tide::Server<DbPool>) {
   app.at("/api/tasks").get(get_all_tasks);
 }
 
-async fn get_all_tasks(req: Request<DbPool>) -> tide::Result {
+async fn get_all_tasks(_: Request<DbPool>) -> tide::Result {
   let tasks = vec![
     Task { id: 1, name: "Break the dishes".into() },
     Task { id: 2, name: "Sweep the lawn".into() },
