@@ -9,7 +9,7 @@ mod modules {
 use modules::db;
 
 
-#[tokio::main]
+#[async_std::main]
 async fn main() -> tide::Result<()> {
   dotenv::dotenv().ok();
   let pool = db::init_pool().await?;

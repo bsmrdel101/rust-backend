@@ -1,6 +1,7 @@
-use tide::{prelude::*, Body, Request, Response, StatusCode};
+use tide::{Body, Request, Response, StatusCode};
 use sqlx::{FromRow, PgPool};
 use std::sync::Arc;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize, Clone, FromRow)]
 struct Character {
