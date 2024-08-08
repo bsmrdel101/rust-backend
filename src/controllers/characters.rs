@@ -2,13 +2,13 @@ use tide::{Body, Request, Response, StatusCode};
 use sqlx::{FromRow, PgPool};
 use std::sync::Arc;
 use serde::{Deserialize, Serialize};
+use tide::log::info;
 
 #[derive(Debug, Deserialize, Serialize, Clone, FromRow)]
 struct Character {
-  id: i16,
+  id: i32,
   name: String,
 }
-
 
 type DbPool = Arc<PgPool>;
 
@@ -17,6 +17,8 @@ pub fn register(app: &mut tide::Server<DbPool>) {
 }
 
 async fn get_all_user_characters(req: Request<DbPool>) -> tide::Result {
+  info!("Received request for /api/characters");
+
   let pool = req.state();
   let response: Vec<Character> = sqlx::query_as::<_, Character>("SELECT * FROM characters")
     .fetch_all(pool.as_ref())

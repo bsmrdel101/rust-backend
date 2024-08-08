@@ -1,5 +1,6 @@
 use std::env;
 use std::sync::Arc;
+use tide::log;
 
 mod controllers;
 mod modules {
@@ -8,10 +9,11 @@ mod modules {
 
 use modules::db;
 
-
 #[async_std::main]
 async fn main() -> tide::Result<()> {
   dotenv::dotenv().ok();
+  log::with_level(log::LevelFilter::Info);
+
   let pool = db::init_pool().await?;
   let pool = Arc::new(pool);
   let mut app = tide::with_state(pool.clone());
