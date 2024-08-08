@@ -13,7 +13,7 @@ use modules::db;
 #[async_std::main]
 async fn main() -> tide::Result<()> {
   dotenv::dotenv().ok();
-  log::with_level(log::LevelFilter::Info);
+  log::with_level(log::LevelFilter::Debug);
 
   let pool = db::init_pool().await?;
   let pool = Arc::new(pool);

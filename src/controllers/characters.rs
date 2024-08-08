@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 struct Character {
   id: i32,
   name: String,
+  class: String,
 }
 
 
