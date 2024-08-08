@@ -9,6 +9,7 @@ mod modules {
 
 use modules::db;
 
+
 #[async_std::main]
 async fn main() -> tide::Result<()> {
   dotenv::dotenv().ok();
