@@ -21,10 +21,10 @@ async fn main() -> tide::Result<()> {
 
   controllers::tasks::register(&mut app);
   controllers::characters::register(&mut app);
+  controllers::websockets::register(&mut app);
 
   let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
   let address = format!("127.0.0.1:{}", port);
-  println!("Server listening on http://{}", address);
   app.listen(address).await?;
   Ok(())
 }
